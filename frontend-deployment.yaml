@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: pandapixel/udagram-frontend:v2
+        image: pandapixel/udagram-frontend:v3
         ports:
         - containerPort: 80
           name: http
@@ -26,6 +26,16 @@ spec:
           requests:
             cpu: 250m
         env:
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: AWS_ACCESS_KEY
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: AWS_SECRET_ACCESS_KEY
         - name: POSTGRES_USERNAME
           valueFrom:
             secretKeyRef:
